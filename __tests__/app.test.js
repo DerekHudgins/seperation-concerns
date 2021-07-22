@@ -28,14 +28,14 @@ describe('03_separation-of-concerns-demo routes', () => {
         });
       });
   });
+  it('returns all orders', async () => {
+    const order = await Order.insert({quantity: 10});
 
-  // it('gets an order by id', async () => {
-  //   const order = await Order.insert({ quantity: 10 });
+    const res = await request(app)
+      .get('/api/v1/orders')
 
-  //   return request(app)
-  //     .get(`/api/v1/orders/${order.id}`)
-  //     .then((res) => {
-  //       expect(res.body).toEqual(order);
-  //     });
-  // });
+    expect(res.body).toEqual([{
+     ...order
+    }]);
+  });
 });
